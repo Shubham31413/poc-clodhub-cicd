@@ -11,7 +11,7 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 		<http:listener doc:name="Listener" doc:id="c40565f7-c063-4198-a18f-89ec0f8f9cbd" config-ref="HTTP_Listener_config" path="/test"/>
 		<logger level="INFO" doc:name="LOG INFO" doc:id="c8fa9e07-bae1-4c37-a64f-8c1e45a1b804" message="pf-test-connection initiated with correlationId: #[vars.vCorrelationId]"/>
 		<set-variable value="#[output application/json --- (correlationId) as String]" doc:name="Set vCorrelationId" doc:id="6d0a5cc8-0340-41f7-b352-630882942ae1" variableName="vCorrelationId"/>
-		<set-payload value='#[output application/json --- ("Hello World!") as String]' doc:name="Set Payload" doc:id="5b20eefe-b413-4cc2-87ca-7c8bef1e85c9" />
+		<set-payload value='#[output application/json --- ("Hello World...") as String]' doc:name="Set Payload" doc:id="5b20eefe-b413-4cc2-87ca-7c8bef1e85c9" />
 		<logger level="DEBUG" doc:name="LOG DEBUG" doc:id="31e45bd1-7782-4d1c-9d0d-edf74a5c055d" message="pf-test-connection terminated with payload: #[payload]"/>
 		<logger level="INFO" doc:name="LOG INFO" doc:id="e18c8f21-2ff5-4406-8b2e-1d110e1c2daf" message="pf-test-connection terminated with correlationId: #[vars.vCorrelationId]"/>
 	</flow>
