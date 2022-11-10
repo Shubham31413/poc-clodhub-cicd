@@ -7,12 +7,21 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="372adf1c-73c4-47c9-8343-f9d1ed98bf77" >
 		<http:listener-connection host="0.0.0.0" port="8081" />
 	</http:listener-config>
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="6e9ebf11-fdb9-4987-a8ac-0ccb86d6e78f" basePath="/api/timezone">
+		<http:request-connection host="worldtimeapi.org"/>
+	</http:request-config>
 	<flow name="pf-test-connection" doc:id="8953a91f-285b-4964-8d05-53e7dc0e13fe" >
 		<http:listener doc:name="Listener" doc:id="c40565f7-c063-4198-a18f-89ec0f8f9cbd" config-ref="HTTP_Listener_config" path="/test"/>
 		<logger level="INFO" doc:name="LOG INFO" doc:id="c8fa9e07-bae1-4c37-a64f-8c1e45a1b804" message="pf-test-connection initiated with correlationId: #[vars.vCorrelationId]"/>
-		<set-variable value="#[output application/json --- (correlationId) as String]" doc:name="Set vCorrelationId" doc:id="6d0a5cc8-0340-41f7-b352-630882942ae1" variableName="vCorrelationId"/>
-		<set-payload value='#[output application/json --- ("Hello World! Jenkins CICD has been setup...") as String]' doc:name="Set Payload" doc:id="5b20eefe-b413-4cc2-87ca-7c8bef1e85c9" />
 		<logger level="DEBUG" doc:name="LOG DEBUG" doc:id="31e45bd1-7782-4d1c-9d0d-edf74a5c055d" message="pf-test-connection terminated with payload: #[payload]"/>
 		<logger level="INFO" doc:name="LOG INFO" doc:id="e18c8f21-2ff5-4406-8b2e-1d110e1c2daf" message="pf-test-connection terminated with correlationId: #[vars.vCorrelationId]"/>
+	</flow>
+	<flow name="pf-world-timezone" doc:id="8b19466e-8910-44bd-be70-96d77dbeee37" >
+		<http:listener doc:name="Listener" doc:id="f25ab666-de81-43c2-8dc4-9a2acf65a1e7" config-ref="HTTP_Listener_config" path="/timezone/{continent}/{region}"/>
+		<logger level="INFO" doc:name="LOG INFO" doc:id="af4c4c6b-58ba-4b43-844a-c58feda8db4d" message="pf-world-timezone initiated with correlationId: #[vars.vCorrelationId]"/>
+		<set-variable value="#[output application/json --- (correlationId) as String]" doc:name="Set vCorrelationId" doc:id="6d0a5cc8-0340-41f7-b352-630882942ae1" variableName="vCorrelationId" />
+		<http:request method="GET" doc:name="Request to timezone API" doc:id="46e5ea1d-a170-4478-af66-c1b27538cb13" config-ref="HTTP_Request_configuration" path="#[output application/json --- (&quot;/&quot; ++ attributes.uriParams.'continent' ++ &quot;/&quot; ++ attributes.uriParams.'region') as String]"/>
+		<set-payload value='#[output application/json --- payload]' doc:name="Set Payload" doc:id="5b20eefe-b413-4cc2-87ca-7c8bef1e85c9" />
+		<logger level="INFO" doc:name="LOG INFO" doc:id="28913a9e-fc09-4a24-97f0-08ea9ff7658c" message="pf-world-timezone terminated with correlationId: #[vars.vCorrelationId]"/>
 	</flow>
 </mule>
