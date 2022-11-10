@@ -21,7 +21,7 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 		<logger level="INFO" doc:name="LOG INFO" doc:id="af4c4c6b-58ba-4b43-844a-c58feda8db4d" message="pf-world-timezone initiated with correlationId: #[vars.vCorrelationId]"/>
 		<set-variable value="#[output application/json --- (correlationId) as String]" doc:name="Set vCorrelationId" doc:id="6d0a5cc8-0340-41f7-b352-630882942ae1" variableName="vCorrelationId" />
 		<http:request method="GET" doc:name="Request to timezone API" doc:id="46e5ea1d-a170-4478-af66-c1b27538cb13" config-ref="HTTP_Request_configuration" path="#[output application/json --- (&quot;/&quot; ++ attributes.uriParams.'continent' ++ &quot;/&quot; ++ attributes.uriParams.'region') as String]"/>
-		<set-payload value='#[output application/json --- payload]' doc:name="Set Payload" doc:id="5b20eefe-b413-4cc2-87ca-7c8bef1e85c9" />
+		<set-payload value='#[output application/json --- (payload)]' doc:name="Set Payload" doc:id="5b20eefe-b413-4cc2-87ca-7c8bef1e85c9" />
 		<logger level="INFO" doc:name="LOG INFO" doc:id="28913a9e-fc09-4a24-97f0-08ea9ff7658c" message="pf-world-timezone terminated with correlationId: #[vars.vCorrelationId]"/>
 	</flow>
 </mule>
