@@ -6,7 +6,7 @@
 
 	<groupId>5f452da6-09e9-4dec-a86d-99b541f8898f</groupId>
 	<artifactId>poc-ch2-cicd-setup</artifactId>
-	<version>1.0.2-SNAPSHOT</version>
+	<version>1.0.3-SNAPSHOT</version>
 	<packaging>mule-application</packaging>
 
 	<name>poc-ch2-cicd-setup</name>
