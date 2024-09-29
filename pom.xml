@@ -4,12 +4,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>5f452da6-09e9-4dec-a86d-99b541f8898f</groupId>
-	<artifactId>poc-ch2-cicd-setup</artifactId>
-	<version>1.0.4-SNAPSHOT</version>
+	<groupId>8024d980-6758-492b-b8df-2fa4bf1d5585</groupId>
+	<artifactId>poc-ch-cicd-jenkins</artifactId>
+	<version>1.0.5-SNAPSHOT</version>
 	<packaging>mule-application</packaging>
 
-	<name>poc-ch2-cicd-setup</name>
+	<name>poc-ch-cicd-jenkins</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -24,29 +24,25 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-clean-plugin</artifactId>
-				<version>3.0.0</version>
+				<version>3.2.0</version>
 			</plugin>
 			<plugin>
 				<groupId>org.mule.tools.maven</groupId>
 				<artifactId>mule-maven-plugin</artifactId>
-				<version>3.7.1</version>
+				<version>3.8.1</version>
 				<extensions>true</extensions>
 				<configuration>
-					<cloudhub2Deployment>
-						<uri>https://anypoint.mulesoft.com</uri>
-						<provider>MC</provider>
-						<environment>Sandbox</environment>
-						<target>Cloudhub-US-East-2</target>
-						<muleVersion>4.4.0</muleVersion>
-						<server>anypoint-connected-app</server>
-						<applicationName>poc-ch2-cicd-setup</applicationName>
-						<replicas>1</replicas>
-						<vCores>0.1</vCores>
-						<deploymentSettings>
-							<lastMileSecurity>false</lastMileSecurity>
-							<forwardSslSession>false</forwardSslSession>
-						</deploymentSettings>
-					</cloudhub2Deployment>
+					<cloudHubDeployment>
+					      <uri>https://anypoint.mulesoft.com</uri>
+					      <muleVersion>4.4.0</muleVersion>
+					      <username>shubham_101</username>
+					      <password>BBD_101</password>
+					      <applicationName>poc-ch-cicd-jenkins-dev</applicationName>
+					      <environment>Sandbox</environment>
+					      <region>us-east-1</region>
+					      <workers>1</workers>
+					      <workerType>MICRO</workerType>
+					</cloudHubDeployment>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -65,7 +61,7 @@
 		<dependency>
 			<groupId>org.mule.connectors</groupId>
 			<artifactId>mule-http-connector</artifactId>
-			<version>1.6.0</version>
+			<version>1.8.0</version>
 			<classifier>mule-plugin</classifier>
 		</dependency>
 		<dependency>
